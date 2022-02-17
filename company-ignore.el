@@ -25,11 +25,17 @@
 (require 'nadvice)
 
 (defun company-ignore-ignorep (input words)
-  ""
+  "Check that `INPUT' is in `WORDS.'
+
+`INPUT' is string like \"do\".
+
+  `WORDS' is words black list, which is string list like `'(\"do\" \"end\")"
   (seq-find (lambda (ban) (string-equal input ban)) words))
 
 (defun company-ignore-before-while-advice (words)
-  ""
+  "Advice function of company backends to stop completion.
+
+`WORDS' is words black list, which is string list like `'(\"do\" \"end\")"
   (lambda (command &optional _arg &rest _args)
     (pcase command
       ('prefix (not (company-ignore-ignorep (company-grab-symbol) words)))
@@ -37,7 +43,11 @@
 
 ;;;###autoload
 (defun company-ignore (backend-symbol words)
-  ""
+  "Stop the completion by words black list.
+
+`BACKEND-SYMBOL' specifies the company backend.
+
+`WORDS' is words black list, which is string list like `'(\"do\" \"end\")"
   (advice-add backend-symbol :before-while (company-ignore-before-while-advice words)))
 
 (provide 'company-ignore)
