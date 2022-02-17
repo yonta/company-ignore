@@ -16,6 +16,9 @@
 ;; For example, when you type short word like `do' in Ruby programing,
 ;; I want not to show any completion candidates like `down'.
 ;;
+;; One solution is that you set `company-minimum-prefix-length' more small.
+;; However, this solution loses the convenience of completion.
+;;
 ;; This package provide that ignore words list of `company-mode'.
 ;; You can stop the company backend by words black list.
 
